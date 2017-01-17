@@ -1,4 +1,4 @@
-name: "Sales Report"
+name: "Cash Report"
 entityName: "{{ country }}"
 id: "{{ index }}"
 

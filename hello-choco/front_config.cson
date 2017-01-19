@@ -5,7 +5,7 @@ settings:[]
 #Comment paramétrer un glossaire?
 glossary:
   #Nom à afficher pour le glossaire
-  title: 'Glossaire'
+  title: "test"
   #liste des termes à afficher
   terms: [
     #1er terme

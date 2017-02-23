@@ -1,0 +1,11 @@
+sep=,
+breakdown,index,domain,variation,label,value
+A,0,funnelchart,-3,basket,12
+A,1,funnelchart,8,shipping,8
+A,2,funnelchart,5,payment,5
+A,3,funnelchart,-2,transactions,2
+B,4,funnelchart,-9,basket,3
+B,5,funnelchart,6,payment,5
+B,6,funnelchart,2,shipping,8
+B,7,funnelchart,1,transactions,2
+B,8,funnelchart,-12,buy,8

@@ -1,0 +1,40 @@
+#the name can be whatever you want
+name: "Toucan Toco's report"
+entityName: "{{ my_report_name_column }}"#column of the report data containing the reports names
+reportValue : "{{ a_report_value }}"#I assign an id to a column of the report data. I can use this data by using the <%= %> templating syntax.
+
+background:#link between the reports and the background img to display
+  assetName: "my_background_img"
+  overlay: true
+
+execsumTitle: "QSA analytics"#dynamic title
+execsumNote: "* Crafted with <strong><3</strong> by the Toucan Team"#footnote
+
+#parameters for the reports search bar
+# search:
+  #If there is more than 1 report which report shall be selected by default?
+  #In your reports dataset add a 'default' column containing the value 1 if the row corresponds to the default report you want to display and 0 otherwise.
+  # default: '{{ my_report_default_column | bool }}'
+  #Choose a message to display in the report search bar
+  # placeholder: 'Choose your report'
+
+# dashboards:
+  #Choose a message to display in the dashboard search bar
+  # search: "Search among dashboards..."
+
+#this is a date selector
+#it allows the user to a period that can be refered to in the dashboards screens and the front-configuration slides
+date:
+  id: "my_date_selector"
+  showInHeader:true
+  type: "buttons"
+  query:
+    domain: 'my_dates_data'
+  fields: ['my_periods']
+#How to use the date selector?
+#To refer to the date selector use this syntax: "<%= requestersManager.id %>"
+#The above date selector's id is my_date_selector so you would refer to the date choosen by the user with : "<%= requestersManager.id %>
+#To learn more see the documentation : https://docs.toucantoco.com/global-app-config/03-requesters.html?highlight=requester
+
+#do not change this parameter!!
+id: "{{ index }}"

@@ -1,0 +1,239 @@
+entityName: "{{ my_dashboard_name_column }}"
+#For a given report if there is more than 1 dashboard which one shall be selected by default?
+#In your dashboard dataset add a 'default' column containing the value 1 if the row corresponds to the default dashboard you want to display and 0 otherwise.
+default: "{{ my_dashboard_default_column | bool }}"
+
+categories: [
+    name: "QSA"
+    kpis: [
+      name: "Utilisateurs"
+      source: "source: Toucan Toco"
+
+      type: "value-dynamic"
+
+      value: "value"
+      precision: 
+        value: ".0f"
+
+      data:
+        value:
+          provider: "SomeGoogleAnalyticsProvider"
+          query: """{
+                        "viewId": "ga:150739343",
+                        "dimensions": [
+                            {"name": "ga:hostname"},
+                            {"name": "ga:segment"}
+                        ],
+                        "dateRanges": [
+                            {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                        ],
+                        "metrics": [
+                            {"expression": "ga:users"}
+                        ],
+                        "segments": [
+                          {
+                            "dynamicSegment":
+                            {
+                              "name": "QSA",
+                              "sessionSegment":
+                              {
+                                "segmentFilters": [
+                                  {
+                                    "simpleSegment":
+                                    {
+                                      "orFiltersForSegment": [
+                                        {
+                                          "segmentFilterClauses": [
+                                            {
+                                              "dimensionFilter":
+                                              {
+                                                "dimensionName": "ga:pagePath",
+                                                "operator": "PARTIAL",
+                                                "expressions": ["qsa"]
+                                              }
+                                          }]
+                                      }]
+                                    }
+                                }]
+                              }
+                            }
+                          }
+                        ]
+                    }"""
+          field:'metric_value'
+    ,
+      name: "Sessions"
+      source: "source: Toucan Toco"
+
+      type: "value-dynamic"
+
+      value: "value"
+      precision: 
+        value: ".0f"
+
+      data:
+        value:
+          provider: "SomeGoogleAnalyticsProvider"
+          query: """{
+                        "viewId": "ga:150739343",
+                        "dimensions": [
+                            {"name": "ga:hostname"},
+                            {"name": "ga:segment"}
+                        ],
+                        "dateRanges": [
+                            {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                        ],
+                        "metrics": [
+                            {"expression": "ga:sessions"}
+                        ],
+                        "segments": [
+                          {
+                            "dynamicSegment":
+                            {
+                              "name": "QSA",
+                              "sessionSegment":
+                              {
+                                "segmentFilters": [
+                                  {
+                                    "simpleSegment":
+                                    {
+                                      "orFiltersForSegment": [
+                                        {
+                                          "segmentFilterClauses": [
+                                            {
+                                              "dimensionFilter":
+                                              {
+                                                "dimensionName": "ga:pagePath",
+                                                "operator": "PARTIAL",
+                                                "expressions": ["qsa"]
+                                              }
+                                          }]
+                                      }]
+                                    }
+                                }]
+                              }
+                            }
+                          }
+                        ]
+                    }"""
+          field:'metric_value'
+    ,
+      name: "Durée moyenne"
+      source: "source: Toucan Toco"
+
+      type: "value-dynamic"
+
+      value: "value"
+      precision: 
+        value: ".0f"
+      unit:' s'
+
+      data:
+        value:
+          provider: "SomeGoogleAnalyticsProvider"
+          query: """{
+                        "viewId": "ga:150739343",
+                        "dimensions": [
+                            {"name": "ga:hostname"},
+                            {"name": "ga:segment"}
+                        ],
+                        "dateRanges": [
+                            {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                        ],
+                        "metrics": [
+                            {"expression": "ga:avgSessionDuration"}
+                        ],
+                        "segments": [
+                          {
+                            "dynamicSegment":
+                            {
+                              "name": "QSA",
+                              "sessionSegment":
+                              {
+                                "segmentFilters": [
+                                  {
+                                    "simpleSegment":
+                                    {
+                                      "orFiltersForSegment": [
+                                        {
+                                          "segmentFilterClauses": [
+                                            {
+                                              "dimensionFilter":
+                                              {
+                                                "dimensionName": "ga:pagePath",
+                                                "operator": "PARTIAL",
+                                                "expressions": ["qsa"]
+                                              }
+                                          }]
+                                      }]
+                                    }
+                                }]
+                              }
+                            }
+                          }
+                        ]
+                    }"""
+          field:'metric_value'
+    ,
+      name: "Nouveaux utilisateurs"
+      source: "source: Toucan Toco"
+
+      type: "value-dynamic"
+
+      value: "value"
+      precision: 
+        value: ".0f"
+      unit:''
+
+      data:
+        value:
+          provider: "SomeGoogleAnalyticsProvider"
+          query: """{
+                        "viewId": "ga:150739343",
+                        "dimensions": [
+                            {"name": "ga:hostname"},
+                            {"name": "ga:segment"}
+                        ],
+                        "dateRanges": [
+                            {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                        ],
+                        "metrics": [
+                            {"expression": "ga:newUsers"}
+                        ],
+                        "segments": [
+                          {
+                            "dynamicSegment":
+                            {
+                              "name": "QSA",
+                              "sessionSegment":
+                              {
+                                "segmentFilters": [
+                                  {
+                                    "simpleSegment":
+                                    {
+                                      "orFiltersForSegment": [
+                                        {
+                                          "segmentFilterClauses": [
+                                            {
+                                              "dimensionFilter":
+                                              {
+                                                "dimensionName": "ga:pagePath",
+                                                "operator": "PARTIAL",
+                                                "expressions": ["qsa"]
+                                              }
+                                          }]
+                                      }]
+                                    }
+                                }]
+                              }
+                            }
+                          }
+                        ]
+                    }"""
+          field:'metric_value'
+    ]
+]
+
+#do not change those parameters!!
+id: "{{ index }}"
+report: "{{ report_id }}"

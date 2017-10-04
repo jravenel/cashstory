@@ -1,0 +1,53 @@
+etl_config:
+    DATA_SOURCES: [
+        domain: "sample_reports"
+        type: "csv"
+        file: "reports.csv"
+    ,
+        domain: "sample_dashboards"
+        type: "csv"
+        file: "dashboards.csv"
+    ,
+        domain: "my_dates_data"
+        type: "csv"
+        file: "my_dates_data.csv"
+    ,
+        domain: "analytics"
+        type: "csv"
+        file: "Analytics Renault.csv"
+        skip_rows:6
+    ,
+        domain: "hierarchy"
+        type: "excel"
+        file: "TOUCAN_MOIS.xlsx"
+        sheetname:'TOUCAN_MOIS'
+    ,
+        domain: "users"
+        type: "csv"
+        file: "users.csv"
+
+    ]
+    
+    DATA_PROVIDERS: [
+      name: 'SomeGoogleAnalyticsProvider'
+      type: 'GoogleAnalytics'
+      options:
+        authentication_file: 'test-connector-ga-47f3cded59c8.json' # Put this file in app/parameters
+    ]
+    
+    REPORTS: [
+      query:
+        domain: "sample_reports"
+      template: "report"
+    ]
+    
+    DASHBOARDS: [
+      query:
+        domain: "sample_dashboards"
+      report: "my_report_name_column"#column that contain the dashboard corresponding report name
+      template: "dashboard1"
+    ]
+    MAX_SELECTABLE_DASHBOARDS: 500 
+    MONGO_INDEXES: [
+      "domain"
+    ]

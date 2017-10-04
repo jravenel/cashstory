@@ -1,0 +1,326 @@
+settings:[]
+
+glossary:
+  title:'Glossaire'
+  terms:[
+    term:'Users'
+    meaning:'The total number of users for the requested time period.'
+  ,
+    term:'New users'
+    meaning:"The number of sessions marked as a user's first sessions."
+  ,
+    term:'Session'
+    meaning:'The total number of sessions'
+  ,
+    term:'Average session duration'
+    meaning:"The average duration (in seconds) of users' sessions."
+  ]
+
+slides: [
+  {
+    level: 0
+    id: 0
+  }
+  {
+    level: 1
+    title: "Analyses détaillées"
+    id: 10
+  }
+  {
+    level: 1
+    title: "Analyses utilisateurs"
+    id: 20
+  }
+  {
+    level: 3
+    title: "Evolution des sessions"
+    source: "Source: googleAnalytics"
+
+    parent_id: 10
+    id: 10001
+
+    chartOptions:
+      data:
+        date:
+          selector:'ga:date'
+          format:'%Y%m%d'
+        provider: "SomeGoogleAnalyticsProvider"
+        query: """{
+                      "viewId": "ga:150739343",
+                      "dimensions": [
+                          {"name": "ga:hostname"},
+                          {"name": "ga:segment"},
+                          {"name": "ga:date"}
+                      ],
+                      "dateRanges": [
+                          {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                      ],
+                      "metrics": [
+                          {"expression": "ga:sessions"}
+                      ],
+                      "segments": [
+                        {
+                          "dynamicSegment":
+                          {
+                            "name": "QSA",
+                            "sessionSegment":
+                            {
+                              "segmentFilters": [
+                                {
+                                  "simpleSegment":
+                                  {
+                                    "orFiltersForSegment": [
+                                      {
+                                        "segmentFilterClauses": [
+                                          {
+                                            "dimensionFilter":
+                                            {
+                                              "dimensionName": "ga:pagePath",
+                                              "operator": "PARTIAL",
+                                              "expressions": ["qsa"]
+                                            }
+                                        }]
+                                    }]
+                                  }
+                              }]
+                            }
+                          }
+                      }
+                    ]
+                  }"""
+      chartType: "linechart"
+      value: "metric_value"
+      date:'ga:date'
+      style:'secondary'
+      units: "metric_value": " sessions"
+  }
+  {
+    level: 3
+    title: "Evolution des utilisateurs"
+    source: "Source: googleAnalytics"
+
+    parent_id: 10
+    id: 10002
+
+    chartOptions:
+      data:
+        date:
+          selector:'ga:date'
+          format:'%Y%m%d'
+        provider: "SomeGoogleAnalyticsProvider"
+        query: """{
+                      "viewId": "ga:150739343",
+                      "dimensions": [
+                          {"name": "ga:hostname"},
+                          {"name": "ga:segment"},
+                          {"name": "ga:date"}
+                      ],
+                      "dateRanges": [
+                          {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                      ],
+                      "metrics": [
+                          {"expression": "ga:users"}
+                      ],
+                      "segments": [
+                        {
+                          "dynamicSegment":
+                          {
+                            "name": "QSA",
+                            "sessionSegment":
+                            {
+                              "segmentFilters": [
+                                {
+                                  "simpleSegment":
+                                  {
+                                    "orFiltersForSegment": [
+                                      {
+                                        "segmentFilterClauses": [
+                                          {
+                                            "dimensionFilter":
+                                            {
+                                              "dimensionName": "ga:pagePath",
+                                              "operator": "PARTIAL",
+                                              "expressions": ["qsa"]
+                                            }
+                                        }]
+                                    }]
+                                  }
+                              }]
+                            }
+                          }
+                      }
+                    ]
+                  }"""
+      chartType: "linechart"
+      value: "metric_value"
+      date:'ga:date'
+      style:'secondary'
+      units: "metric_value": " utilisateurs"
+  }
+  {
+    level: 3
+    title: "Evolution des nouveaux utilisateurs"
+    source: "Source: googleAnalytics"
+
+    parent_id: 10
+    id: 10003
+    
+    chartOptions:
+      data:
+        date:
+          selector:'ga:date'
+          format:'%Y%m%d'
+        provider: "SomeGoogleAnalyticsProvider"
+        query: """{
+                      "viewId": "ga:150739343",
+                      "dimensions": [
+                          {"name": "ga:hostname"},
+                          {"name": "ga:segment"},
+                          {"name": "ga:date"}
+                      ],
+                      "dateRanges": [
+                          {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                      ],
+                      "metrics": [
+                          {"expression": "ga:newUsers"}
+                      ],
+                      "segments": [
+                        {
+                          "dynamicSegment":
+                          {
+                            "name": "QSA",
+                            "sessionSegment":
+                            {
+                              "segmentFilters": [
+                                {
+                                  "simpleSegment":
+                                  {
+                                    "orFiltersForSegment": [
+                                      {
+                                        "segmentFilterClauses": [
+                                          {
+                                            "dimensionFilter":
+                                            {
+                                              "dimensionName": "ga:pagePath",
+                                              "operator": "PARTIAL",
+                                              "expressions": ["qsa"]
+                                            }
+                                        }]
+                                    }]
+                                  }
+                              }]
+                            }
+                          }
+                      }
+                    ]
+                  }"""
+      chartType: "linechart"
+      value: "metric_value"
+      date:'ga:date'
+      style:'secondary'
+      units: "metric_value": " utilisateurs"
+  }
+  {
+    level: 3
+    title: "Catégorie d'appareil"
+    source: "Source: googleAnalytics"
+
+    parent_id: 10
+    id: 10004
+
+    chartOptions:
+      data:
+        provider: "SomeGoogleAnalyticsProvider"
+        query: """{
+                      "viewId": "ga:150739343",
+                      "dimensions": [
+                          {"name": "ga:hostname"},
+                          {"name": "ga:segment"},
+                          {"name": "ga:deviceCategory"}
+                      ],
+                      "dateRanges": [
+                          {"startDate": "<%= requestersManager.my_date_selector  %>", "endDate": "today"}
+                      ],
+                      "metrics": [
+                          {"expression": "ga:sessions"}
+                      ],
+                      "segments": [
+                        {
+                          "dynamicSegment":
+                          {
+                            "name": "QSA",
+                            "sessionSegment":
+                            {
+                              "segmentFilters": [
+                                {
+                                  "simpleSegment":
+                                  {
+                                    "orFiltersForSegment": [
+                                      {
+                                        "segmentFilterClauses": [
+                                          {
+                                            "dimensionFilter":
+                                            {
+                                              "dimensionName": "ga:pagePath",
+                                              "operator": "PARTIAL",
+                                              "expressions": ["qsa"]
+                                            }
+                                        }]
+                                    }]
+                                  }
+                              }]
+                            }
+                          }
+                      }
+                    ]
+                  }"""
+                          # {"name": "ga:pagePathLevel1"}
+                      # "segments":  [{"segmentId": "gaid::THzxvAeRT_iG2b_nYV9lfg"}]
+      chartType: "horizontalBarchart"
+      value: "metric_value"
+      label: "ga:deviceCategory"
+      groups: "center"
+      sort: "desc"
+      units: "metric_value": " sessions"
+  }
+  {
+    level: 3
+    title: "Analyse des connexions utilisateurs"
+    source:'Analyse des connexions ayant eu lieu au cours de la semaine passée'
+    parent_id: 20
+    id: 20001
+
+    filters:
+      'bottom-right':
+        on:'type'
+        type:'buttons'
+
+    chartOptions:
+      filters:
+        'upper-right':
+          on:"DR_LIB"
+          type:'dropdown'
+          reset:'Tous'
+
+      data:
+        query:
+          domain: "user-id-analytics"
+      
+      chartType: "horizontalBarchart"
+      
+      value: "Sessions"
+      label: "label_name"
+      # variation: "evolution"
+      # variationLegend: "Écart<br>année passée"
+      
+      units:
+        "Sessions": ""
+        "Durée moyenne des sessions":' s'
+      sort: "desc"
+
+      showAverage: true
+      legend:true
+      meta: ["Durée moyenne des sessions"]
+
+  }
+]
